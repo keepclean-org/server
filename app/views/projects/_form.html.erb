@@ -1,0 +1,13 @@
+<%= form_for @project do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, disabled: true %>
+
+  <br/>
+
+  <%= f.label :rubocop_enabled, "RuboCop" %>
+  <%= f.check_box :rubocop_enabled %>
+
+  <br/>
+
+  <%= f.submit %>
+<% end %>
