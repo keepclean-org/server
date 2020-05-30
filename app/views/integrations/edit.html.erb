@@ -1,0 +1,16 @@
+<% breadcrumb image_tag(@integration.logo, width: '16', height: '16') + @integration.human_name, edit_project_integration_path(@project, @integration) %>
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <%= simple_form_for @integration, as: 'integration', url: [@project, @integration.becomes(Integration)], local: true do |f| %>
+      <h1 class="title is-spaced">Configuration</h1>
+      <h2 class="subtitle">General</h2>
+      <%= f.input :enabled %>
+      <%= f.input :allowed_to_fail %>
+      <%= f.input :on_branch if @integration.has_pronto?%>
+      <h2 class="subtitle"><%= @integration.human_name %></h2>
+      <%= decorate @integration, f: f %>
+      <%= f.button :submit, 'Save' %>
+    <% end %>
+  </div>
+</div>

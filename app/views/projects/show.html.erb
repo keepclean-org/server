@@ -1,0 +1,23 @@
+<nav class="panel panel-centered-fixed-width">
+  <p class="panel-heading">
+    Integrations (<%= @project.integrations.count %>)
+  </p>
+
+  <% @project.integrations.ordered.each do |integration| %>
+    <%= link_to edit_project_integration_path(@project, integration), class: "panel-block #{'is-active' if integration.enabled}" do %>
+      <span class="panel-icon" title="<%= integration.enabled ? 'enabled' : 'disabled' %>"><%= icon('fas', 'circle') %></span>
+      <% if integration.allowed_to_fail? %>
+        <span class="panel-icon" title="allowed to fail"><%= icon('fas', 'shield-alt') %></span>
+      <% end %>
+      <% if integration.on_branch? %>
+        <span class="panel-icon" title="on branch" ><%= icon('fas', 'code-branch') %></span>
+      <% end %>
+      <%= integration.human_name %>
+      <span class="panel-image"><%= image_tag(integration.logo) %></span>
+    <% end %>
+  <% end %>
+
+  <div class="panel-block">
+    <%= link_to 'Add', new_project_integration_path(@project), class: 'button is-link is-outlined is-fullwidth' %>
+  </div>
+</nav>

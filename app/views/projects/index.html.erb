@@ -1,0 +1,13 @@
+<article class="panel panel-centered-fixed-width">
+
+  <p class="panel-heading">
+    Projects (<%= @projects.count %>)
+  </p>
+
+  <% @projects.each do |project| %>
+    <%= link_to project_path(project), class: "panel-block #{'is-active' if project.last_run > 1.week.ago}" do %>
+      <span class="panel-icon"><%= icon('fas', 'code', title: "Last run: #{time_ago_in_words(project.last_run)} ago") %></span>
+      <%= project.name %>
+    <% end %>
+  <% end %>
+</article>

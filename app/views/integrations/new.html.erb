@@ -1,0 +1,12 @@
+<nav class="panel panel-centered-fixed-width">
+  <p class="panel-heading">
+    Integrations
+  </p>
+
+  <% @integrations.each do |integration| %>
+    <%= link_to add_project_integration_path(@project, integration.key), class: "panel-block #{'is-active' unless @project.has_integration?(integration)}", method: :put do %>
+      <span class="panel-icon"><%= icon('fas', 'plus') %></span> <%= integration.human_name %>
+      <span class="panel-image"><%= image_tag(integration.logo) %></span>
+    <% end %>
+  <% end %>
+</nav>

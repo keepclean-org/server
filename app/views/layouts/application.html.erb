@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KeepClean</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <%= link_to 'Account', account_path, class: 'navbar-item' %>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <% if user_signed_in? %>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'button is-danger is-inverted is-outlined') %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <nav class="breadcrumb has-bullet-separator has-background-light py-3" aria-label="breadcrumbs">
+        <ul>
+          <% breadcrumb_trail do |crumb| %>
+            <li class="<%= 'is-active' if crumb.current? %>"><%= link_to crumb.name, crumb.path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <div class="notification is-light <%= flash_class(key) %>">
+          <%= value %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="container mt-5">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>
