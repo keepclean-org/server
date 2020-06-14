@@ -1,25 +1,31 @@
 class ProjectsController < ApplicationController
+  breadcrumb 'Projects', :projects_path
+
+  before_action :set_project, only: [:show, :edit, :update]
+
   def index
-    @projects = Project.all
+    @projects = policy_scope(Project)
   end
 
   def show
-    @project = Project.find(params[:id])
+    breadcrumb @project.name, project_path
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
     @project.update(project_params)
     redirect_to @project
   end
 
   private
 
+  def set_project
+    @project = policy_scope(Project).find(params[:id])
+  end
+
   def project_params
-    params.require(:project).permit(:rubocop_enabled)
+    params.require(:project)
   end
 end

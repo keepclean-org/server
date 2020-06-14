@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_170208) do
+ActiveRecord::Schema.define(version: 2020_06_10_201424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "integrations", force: :cascade do |t|
+    t.string "type"
+    t.bigint "project_id"
+    t.boolean "enabled"
+    t.json "config"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "allowed_to_fail", default: false
+    t.boolean "on_branch", default: false
+    t.index ["project_id"], name: "index_integrations_on_project_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
@@ -21,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_05_30_170208) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "rubocop_enabled"
     t.json "rubocop_config"
+    t.datetime "last_run", default: -> { "now()" }
   end
 
 end

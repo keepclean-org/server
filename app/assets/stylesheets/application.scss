@@ -10,6 +10,44 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+@import "bulma";
+@import "spacing";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.breadcrumb {
+  img, i.fas {
+    margin-right: 8px;
+  }
+}
+
+.panel-centered-fixed-width {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.panel-image {
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  margin-left: auto;
+}
+
+.devise-panel {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.center-v {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.edit_integration .field {
+  margin-left: 27px;
+  margin-right: 27px;
+}

@@ -1,0 +1,8 @@
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <%= simple_form_for(current_user, url: :account) do |f| %>
+      <%= f.input :email, disabled: true %>
+      <%= f.input :token, disabled: true %>
+    <% end %>
+  </div>
+</div>
